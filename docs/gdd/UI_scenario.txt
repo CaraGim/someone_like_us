@@ -1,0 +1,203 @@
+
+# UI scenario
+
+■ Game starts
+
+ - Main menu button appears: Game start, import a saved game data(importing game scene), credit, game exit.
+
+ 
+
+───────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+
+■ Loading scene
+
+ - Background illustration
+ - UI for 100 % gauge to indicate current state of launching the game system
+ - Text for game tip and game lore
+
+
+───────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+■ Pick up the phone
+ - Each button on the phone looks like smartphone application icon.
+
+Buttons: Profile, Message, Blueprint, To-do-list, Private chat, Camera, gallery, Game configure, Power off, Back
+
+Profile: check the player's information including player's specific.
+
+Message: Open the quest.
+
+To-do-list: Move to the Theme field or check a collected item list.
+
+Blueprint: Open the blueprint item list.
+
+Camera: Take a game screenshot.
+
+Update : Save or import the player's game data(slot 0 to 9).
+
+Game configure: open the game configure list.
+
+Power off: Exit the game.
+
+Back: Go back to the previous screen on the phone.
+
+
+───────────────────────────────────────────────────────────
+
+
+■ Default screen of phone object.
+
+ - Time: it's following day-night cycle system. Morning/ Brunch time / Lunch / Afternoon / Sundown / Dinner / Night / Midnight / Sunrise. this UI will be like small text on the top of screen, and the phone screen background shifts by the time. For example, if the time in the game is "Sundown", then player's phone screen  shows orange background colour and sunset illustration.
+ 
+ - Player's stat: Health(3 quantity like phone battery shape), speed(on/off toggle shape UI), sanity gauge(gauge UI in dounut shape and percentage text in the centre), artistic level(gauge ui with indicating level between 0 to 9), 
+
+ - Phone application buttons(Profile, Message, Blueprint, To-do-list, Private chat, Camera, gallery, Game configure, Power off, Back).
+
+
+
+───────────────────────────────────────────────────────────
+
+■ Game configure
+
+ graphic: High, Medium, Low
+
+ screen resolution: Full screen, 1920 × 1080, 512 × 288
+
+ sound: Background music, sound effect, UI sound
+  - Volume: 1 to 10
+  - Each sound volume can be adjusted by slide bar and handle UI. Slide bar indicates 1 to 10 audio volume, and the place where handle stop indicates volume value. 
+ 
+ Brightness: Screen brightness
+  - Brightness value: 1 to 10
+  - The brightness can be adjusted by slide bar and handle UI. Left end is 1 and right end is 10.
+
+ Save: The currently value of each configure elements will be saved and then close the configure page on the phone.
+
+
+
+───────────────────────────────────────────────────────────
+
+■ Check the message
+
+Message scenario 1: 
+
+Order | What UI player interacts | What will happen from interaction    
+
+1     | Message app button from phone  | open the chat from NPC. If this is first time player open the "message" app on the phone, then NPC sends the message to player " Now you here. You will send me the information you collected from investigation.", "Tell me 'report' then I'll check your message immediately by setting keyword alarm.", "Otherwise, I might check your message lately during the working hours. Well now, let's see if you learned. "
+
+2     | Input the "quest" relative text in the input box, and click the "send" button to NPC | NPC will response. If player has completed the quest, NPC will say something like " Nice work. Let me check …" and gives player a blueprint item as reward, if player's quest has not done yet, NPC will say something like " Didn't expect you will bring something already. well, take a time. ".
+
+3     | Player clicks the "Receive blueprint" button on the chat with NPC. | The blueprint item will be stored in the Blueprint list in the Blueprint app. Blueprint item's name will be like "Prop item name + blueprint". 
+
+───────────────────────────────────────────────────────────
+
+■ Check the To-do-list
+
+ 
+Order | What UI player interacts | What will happen from interaction    
+1     | Back pack button on the phone screen | Open the To-do-list app and phone screen shows "Adventure the stage" button, "back to the basement" button, and the list of collected item which player collected from Theme field and investigation stage. If player hasn't collected any item from theme field or investigation stage, it will show the text like "You haven't found something yet". The collected item list will be like "Item name + item Description + item quantity".
+
+2     | Adventure the stage | The phone screen shows the list of stage. 
+
+
+3     | Click the one from stage list  |  Player moves to the selected stage.
+
+
+4     | Click the back button |  The phone screen turn back to the first screen of To-do-list app.
+
+
+5     | "back to the basement" button |  Player goes back to basement.
+
+
+───────────────────────────────────────────────────────────
+
+■ check the blueprint
+
+
+Blueprint Scenario 1 (Blueprint item is not listed) : player press E key or click the phone item object -> Phone screen pop up -> player clicks blueprint app icon on the phone screen -> If no blueprint item player obtained yet, the text appears "No blueprint for now. Ask your friend." on phone screen. -> player press "back" button -> close the blueprint app.
+
+Blueprint Scenario 2 (Blueprint item is listed) : player press E key or click the phone item object -> Phone screen pop up -> player clicks blueprint app icon on the phone screen -> The blueprint item list appears on the screen. -> player choose the one of blueprint items from the list -> prop crafting activates -> Crafting is completed -> player installed the crafted item on the spot -> player press "back" button -> close the blueprint app.
+
+
+───────────────────────────────────────────────────────────
+
+■ Camera (Take a screenshot the game screen)
+
+Order | What UI player interacts | What will happen from interaction    
+
+1     | Camera app button from phone  | The game screen turns into game screenshot mode.
+
+2     | Take a photo button | The game take a screenshot of current game screen and store the photo in the player's directory of computer.
+
+3     | "back" button |  The game close off the game screenshot mode.
+
+
+
+───────────────────────────────────────────────────────────
+
+■ Update (save or import the player's game data)
+
+Order | What UI player interacts | What will happen from interaction    
+
+1     | Update app button on the phone  |  
+
+2     |  | 
+
+3     |  |  
+
+───────────────────────────────────────────────────────────
+
+■ Power off (Game exist)
+
+Order | What UI player interacts | What will happen from interaction    
+
+1     | Power off button on the phone | The UI box of warning will appear with this message " Are you sure to exit the game? " and two choice buttons like "Back to the reality" and "Stay in this world".
+
+2     | "Back to the reality" button |  Exit the game.
+
+3     | "Stay in this world" button | The phone screen back to main screen.
+
+───────────────────────────────────────────────────────────
+
+■ Close the phone (close the phone screen)
+
+Order | What UI player interacts | What will happen from interaction    
+
+1     | "back" button on a phone twice | If player has been opening any app on the phone, the app screen will be closed.
+
+───────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+
+■ Game Effect: How the effect will look like.
+
+Discovered: Environment sfx audio, Target sfx audio and Heart beat audio volume become louder. Screen becomes vignetting on the all edges(this is a metaphor for vision narrowing when people are panicked).
+
+Craft: Player's animation plays, which is vaulting on a spot. The animation will be like player character vaulting on the spot repeatedly, and the prop item silhouette is flickering.
+
+Crafting completed: The prop item will be popping up animatic, such as Don't starve together game's craft completing animation.
+
+Install: 10px of 3 star shape sprites will appear around the props as an effect and they twinkle for a 2 seconds.
+
+
+───────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+
+■ Credit
+
+ - Background illustration
+
+ - Text for credit : Directed by Cara Gim
+
+ - Too use: Claude AI, Groovepad, Godot, Photoshop, Krita, BlockBench
+
+
+
+
+
+
+

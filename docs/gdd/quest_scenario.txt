@@ -1,0 +1,59 @@
+
+# Quest scenario
+
+■ Investigation stage scenario
+
+
+Investigation stage 1. Cemetery 
+
+Phase 1. Player stand on the cemetery. -> player tries to interact with the environment(grave, ground, grave stone) to find the interactive objects. -> Player find a door of small outbuilding. 
+
+Phase 2. When player tries to open the door, the loud clank noise comes out -> Security guard walks in cemetery to find player and cutscene actives to indicate this situation. -> If player open the outbuilding door, then dump of soil dirt pours down toward players. -> Player's dialogue says "What is this dirt? The smell is awful like a rotten meat.", "Does OO(NPC name) really wants me to look out this dirt to find some useful information?". -> Security guard's sensor range becomes wider, therefore player needs to keep hiding and running away from the security guard's sensor. -> Player looks for seed and skull items by wiping soil dirt away -> If player successfully finds the seed and skull item, Player will encounter the TARGET at the cemetery gate. If player doesn't have seed and skull item in the inventory, then player will back to the basement. If player have collected any item, this data will be saved. When player goes back to the basement without the quest items, the dialogue will popup "I guess this is the best for me today. Should I back to my home?". The choice buttons are "Back to home" and "Let's keep looking." Player will go back home or stay at the cemetery depends on the choice player clicks.
+
+Phase 3. When player encounters the TARGET at the cemetery gate, the cutscene activates. The cutscene video is about that phone rings, and player takes the phone, both target and player will hear that "Kill what you see now. NOW!" from the phone. -> Cutscene finishes -> Target attacks the player while player's movement doens't work(game system locks player movement), and the Target runs away(hit and run).
+
+Phase 4. Player comes back to the basement. -> Player interacts with "phone" object. -> The cutscene activates. This cutscene is about NPC validating the quest succession. -> Player earns reward item "Plant pot blueprint" from NPC. -> Player open the phone to check the a plant pot blueprint that NPC sent to Player. -> player crafts the plant pot -> player installs the plant pot where player clicks the spot on the screen.
+
+───────────────────────────────────────────────────────────
+
+Investigation stage 2. School(1,2,3,4 floors)
+
+(empty)
+
+
+
+
+───────────────────────────────────────────────────────────
+
+Investigation stage 3. Abandoned mental hospital (넥플 래치드 시리즈 다시 감상하고 영감얻기)
+
+
+(empty)
+
+
+
+
+
+
+───────────────────────────────────────────────────────────
+
+Investigation stage 4. Mansion yard
+
+
+(empty)
+
+
+
+
+───────────────────────────────────────────────────────────
+
+
+Investigation stage 5. Mansion
+
+
+(empty)
+
+
+
+
+

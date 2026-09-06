@@ -1,0 +1,244 @@
+# Game Data
+
+
+■ Key bind
+
+- Movement: Press W,A,S,D Key
+
+- Screen rotation: Mouse movement
+
+- Checking player's phone: Click the phone or Press E Key
+
+- Interacting with object: Press F Key or Click the object.
+
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+
+■ Game configure
+
+ graphic: High, Medium, Low
+
+ screen resolution: Full screen, 1920 × 1080, 512 × 288
+
+ sound: Background music, sound effect, UI sound
+  - Volume: 1 to 10
+  - Each sound volume can be adjusted by slide bar and handle UI. Slide bar indicates 1 to 10 audio volumn, and the place where handle stop indicates volume value. 
+ 
+ Brightness: Screen brightness
+  - Brightness value: 1 to 10
+  - The brightness can be adjusted by slide bar and handle UI. Left end is 1 and right end is 10.
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+■ Player stat
+
+- health quantity: 3
+- artistic: Level 0 to 9 
+- speed: Buff toggle on/off. if toggle is on, player's movement speed becomes x2.0
+- sanity: 100% gauge. Buff toggle on/off. if toggle is on, player's sanity becomes 200%.
+
+
+────────────────────────────────────────────────────────────
+
+
+■ Enemy attack
+
+- Each hit destroys 1 of player's health quantity.
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+
+■ Effect
+
+Asset for effect: Environment sfx audio, Target sfx audio, Heart beat audio, Screen vignetting 2D sprite, 4 point star sprite, props silhouette.
+
+Discovered: Effect activates when player is in the range of enemy's sensor.
+
+Craft: Effect activates when player creates prop by interacting with blueprint item. this effect ends if "Crafting completed" is on.
+
+Crafting completed: Effect activates when the prop item is crafted completely.
+
+Install: Effect activates when player installs the prop on the spot.
+
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+
+■ Check point
+
+- If cutscene/investigation stage/installing prop is completed, the checkpoint gets generated.
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+
+■ Stage (this stage information is about sandbox mode stage excluding the quest data such as quest required items. because these items will be placed randomly whenever player enters to the stage).
+
+ID | Location name | Collectable item | Required performance
+
+01.| Cemetery | Pebbles, Marble gem, Animal(cat, crow, spider), Soil | Click the item to collect while player survives from security guard
+
+02.| Theme field | Flowers(violets, Sunflowers, Asters), Plants(green foxtail, maple leaf, swedish ivy, bamboo, apple, blueberry, banana), Animal(dog, quail), Bug(butterfly, bee) | Click the item to collect while player survives from security guard.
+
+03.| School(1,2,3,4 floors) | Books, Stationary(Diary, pen, pencil, pen cup), Painting stuff(easel, brush, marker), Dress form, Sewing machine | Click the item to collect.
+
+04.| Abandoned mental hospital | Office stuff(PC, Laptop, printers), Storage box | Click the ghost to talk and collect item while player survives from security guard.
+
+05.| Mansion | (empty) | (empty)
+
+
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+
+■ Quest data: 
+
+ID | Quest title | Location name | request item | Enemy attacking animation file name | Enemy murdering animation file name | 
+
+01.| Thinker's bedroom | Cemetery | Seed, Skull | (empty) | (empty) |
+
+02.| Barn dreamer | School(1,2,3,4 floors) | Capsule pill | (empty) | (empty) |
+
+03.| Thinker's jail | Abandoned mental hospital | Mass model, Journal diary | (empty) | (empty) |
+
+04.| (empty) | Mansion | (empty) | (empty) | (empty) | (empty)
+
+05.| (empty) | Lounge of mansion  | (None) | (None)
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+
+■ Collectable(interactable) object item
+
+ID | Name | Description
+
+01 | seed | A seed that can grow and bloom. What you want to be?
+02 | skull | A clean human skull despite of the rotten smell of dirt. Who were you? 
+03 | Capsule pill | Description
+04 | L size male's underwear | A male's underwear with small pocket in the middle. There is a ripped hole in the back. Is it blood? What happened to this man..
+05 | Doctor's note | A doctor's written medical opinion. 급성 세균성 전립선염, 급성 요폐 및 배뇨 장애, 항문 괄약근 파열, 치열 및 천공.. It's hard to understand all these fancy medical words. 
+06 | Video tape | A video film tape wrapped by red colour tape. It's written like "Crying Jason". It seems like half of this already played. 
+07 | Mass model | A foamboard architectural model made by someone. It's a beautiful and safe city, makes me want to live here. Did that person make it?
+08 | Journal diary | An old diary. It seems like history of someone, someone like (NPC's name). What all the people in the journal meant to this person?
+09 | (empty) | (empty)
+10 | (empty) | (empty)
+11 | (empty) | (empty)
+12 | (empty) | (empty)
+
+13 | pebbles | Number of smooth pebble. It seems to be used for flooring, stacking, and decorating.. 
+14 | marble gem | Shiny beautiful stone with unique marble pattern. 
+15 | cat | Adorable friend. It likes some eggs and blueberry, banana.  
+16 | crow | Smart friend. It likes some egg, and fruits. Sometimes gives me a marble gem. 
+17 | spider | Gorgeous fuzzy friend. It gives me a web.
+18 | dog | Loyal friend. It likes some egg and fruits.   
+19 | quail | Talkative friend. It gives me few eggs once a week. It likes fruits and seeds. 
+20 | violets | Violet colour flower.  
+21 | Sunflowers | Sunflower. It gives me sunflower seeds.
+22 | Asters | Star shaped, daisy like perennial flower. It's tough and strong. 
+23 | green foxtail | Fuzzy tail-like flower head plant. Cat and dogs don't like this. 
+24 | maple leaves | Fallen leaves from maple tree.  
+25 | swedish ivy | A green, trailing houseplant with shiny, scalloped leaves.
+26 | bamboo | A tall, fast-growing green grass with hollow stems.  
+27 | apple | A sweet, crunchy, and round fruit  
+28 | blueberry | Small, round, blue fruit that tastes sweet and very juicy  
+29 | banana | A yellow, sweet, soft, and healthy fruit with no seeds.  
+30 | butterfly | Beautiful friend. It gives me a butter once a week if the flower is provided.
+31 | bee | Hard worker friend. It gives me honey once a week if the flower is provided.
+32 | cobweb thread | Sticky silk thread made by spiders. 
+33 | Honey | A sweet, gold liquid made by bees
+34 | butter | Smooth, yellow dairy food made from butterfly
+
+ID | Name | Description
+ID | Name | Description
+ID | Name | Description
+ID | Name | Description
+ID | Name | Description
+ID | Name | Description
+ID | Name | Description
+ID | Name | Description
+ID | Name | Description
+
+
+Books, Stationary(Diary, pen, pencil, pen cup), Painting stuff(easel, brush, marker), Dress form, Sewing machine
+
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+
+■ Reward: A blueprint for prop(furniture, appliance, tools and so on).
+
+Blueprint for prop list:
+
+- Main quest
+
+ID | Name | Description
+
+01 | Plant Pot | A pot contains rich soil and seed planted. (add more information about NPC)
+02 | name | desc  
+03 | name | desc  
+04 | name | desc  
+05 | name | desc  
+06 | name | desc  
+07 | name | desc  
+08 | name | desc  
+09 | name | desc  
+10 | name | desc  
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+■ player's data 
+
+- Current player health system: Player's left health figure.
+
+- current player artistic stat: Current player's artistic stat which can be eared from Theme field.<<<
+
+- current player speed stat: Current player's speed stat which can be eared from Theme field.
+
+- current player location: whether player is at basement or at investigation stage. 
+
+- current player quest: The latest quest message player took from NPC.
+
+- current player message: The history of message that player has taken from NPC.
+
+- current player inventory: The item information that player collected from stage.
+
+- current player basement: The props information(whether it is crafted or not, installed location).
+
+- current player To-do-list item list: The item list that player has been collecting from Theme field.
+
+
+────────────────────────────────────────────────────────────
+
+
+■ Save the player's data
+
+- player's data: Current player health figure, current player stage, current player quest, current player message, current player inventory, current player basement, current player artistic stat, current player speed stat.
+
+- Data save slot: 10 (slot 0,1,2,3,4,5,6,7,8,9)
+
+- Data override: Game data will saved in slot 1 if player don't choose what slot player want to save the game data.
+
+- Automatically save the game data by checkpoint: When player pass the checkpoint, then game saves the player's data in slot 0.
+
+- If the game is crashed, the game is automatically save the current player's data.
+
+
+

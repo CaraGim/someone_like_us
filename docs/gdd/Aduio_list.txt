@@ -1,0 +1,107 @@
+
+
+# Audio list
+  - Background music: Each BGM never overlap each other. A audio file which is playing always fade out in 2 seconds when another BGM is waiting to play in the game.
+
+■ Template 
+Audio use 
+ - The situation when audio file plays in the game : "Audio file name"
+
+────────────────────────────────────────────────────
+
+■Background music (BGM)
+
+Game main menu
+ - When player launch the game: "ConcreteJungle_game_main_menu_screen"
+
+Loading scene audio: Continue play from Game main menu BGM
+
+Investigation stage BGM audio
+ - When player enter the investigation stage: "ImmersiveHouse_Investigation_stage"
+ - When player is in the enemy AI's sensor range: "HouseTherapy_investigation_stage_enemy_chasing_player"
+
+Theme filed stage BGM audio: 
+ - When player encounters other players: "2-StepRipple_encounter_otherplayer_at_themeField"
+
+Quest taking from NPC BGM audio
+ - When player is taking the quest from phone item : "VelvetNights_open_the_phone_message_taking_quest"
+
+NPC approved quest item, earning blueprint, install the props
+ - When NPC approved quest item and don't stop the audio until other BGM starts play. the audio will fade out in 3 seconds: "Lo-FiSunshine_NPC_approved_taking_reward_blueprint_install_props"
+
+
+Chapter 2
+ - When NPC saved a player from quest: "SoulEchoes_NPC_saved_player_in_chapter2"
+
+Chapter 3
+ - When player starts chapter 3: "SummerNight Groove_Chapter3"
+
+
+────────────────────────────────────────────────────────────
+
+
+■ UI sound effect (SFX)
+
+
+ General UI click sound
+  - When player mouse click the interactive UI button in the game: (empty)
+
+ General interactive sound
+  - When player press the button or click the object to interact with collectable object: (empty)
+
+ Phone opening sound
+  - When player turns on the phone screen: "phone_open_sfx"
+
+ Phone closing sound
+  - When player turns off the phone screen: "phone_close_sfx"
+
+ App button click sound
+  - When player open the app in the phone item: "phone_app_sfx2"
+
+────────────────────────────────────────────────────────────
+
+
+■ Play sound effect (SFX)
+
+ Discovered is on
+  - When player is in the enemy AI sensor's range, the heart beat SFX plays: "heartbeat_sfx_1s_4beat"
+
+ Craft 
+  - When player clicks blueprint to craft the prop item by "Crafting completed" is on: (empty)
+
+ Install
+  - When player installs a prop item on the spot: (empty)
+
+ Enemy sound effect
+  - quest 1 enemy run(when enemy is near player in 30 tiles):  (empty)
+  - quest 1 enemy attack:  (empty)
+  - quest 1 enemy roar(Discovered is on, only one time):  (empty)
+
+  - quest 2 enemy run(when enemy is near player in 10 tiles):  (empty)
+  - quest 2 enemy attack:  (empty)
+  - quest 2 enemy roar(Discovered is on, only one time):  (empty)
+
+  - quest 3 enemy run(when enemy is near player in 30 tiles):  (empty)
+  - quest 3 enemy attack:  (empty)
+  - quest 3 enemy roar(Discovered is on, only one time):  (empty)
+
+  - quest 4 enemy run(when enemy is near player in 30 tiles):  (empty)
+  - quest 4 enemy attack:  (empty)
+  - quest 4 enemy roar(Discovered is on, only one time):  (empty)
+
+  - quest 5 enemy run(when enemy is near player in 30 tiles):  (empty)
+  - quest 5 enemy attack:  (empty)
+  - quest 5 enemy roar(Discovered is on, only one time):  (empty)
+
+
+
+
+
+
+ 
+
+
+
+
+
+

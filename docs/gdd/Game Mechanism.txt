@@ -1,0 +1,180 @@
+# Game Mechanism 
+
+────────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+■ Key bind and its function
+
+Movement: Press W,A,S,D Key
+ - Research average games which use W,A,S,D as player movement key bind, and apply it.
+
+
+Screen rotation: Mouse movement
+
+
+Checking player's phone: Click the phone or Press E Key
+ - Player's phone has these functions with each button: Checking the quest information and progress(Quest information, required task to complete), checking the map to brows current location, checking the collected item list with information.
+ - Player is able to check the phone while player is moving, but player can not interact with a object item while player is checking the phone.
+
+
+Interacting with object: Press F Key or Click the object.
+ - The interaction available object item should be only one in the screen. The standard of "which object item will be interaction available" is that a invisible dot(150px) in centre of screen exactly aims to object item on the screen. When the object item is available to click, then the screen will be a bit blur except the object item. Because the interactable object item must be emphasized to give player a signal that "this object item is interactable". 
+
+────────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+■ Player stat system
+
+- Health: 
+ - Total 3 times of tolerance from interaction with the enemy. if player interacts with enemy with 3 times at a investigation stage, then game is over. Player will start from the basement after game over.
+
+- Artistic: 
+
+- Speed: Player movement animation speed. if player is in a 'speed buff' on, then the animation speed becomes x2.0. this will maintain while player is in stage. Once player moves to basement, this buff effect turns off.
+
+- Sanity: Player sanity gage. Total sanity gage is 100%. if player is in the enemy AI's sensor range(when enemy finds a player and starts to chase the player), then player's sanity gage decreases by 3.30 % per 1 second. if player is in a 'sanity buff' on, then the 'Discovered' effect turns off.
+
+────────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+■ Effect : How the effect will look like.
+
+Discovered: Environment sfx audio, Target sfx audio and Heart beat audio volume become louder. Screen becomes vignetting on the all edges(this is a metaphor for vision narrowing when people are panicked).
+
+Craft: Player's animation plays, which is vaulting on a spot. The animation will be like player character vaulting on the spot repeatedly, and the prop item silhouette is flickering.
+
+Crafting completed: The prop item will be popping up animatic, such as Don't starve together game's craft completing animation.
+
+Install: 10px of 3 star shape sprites will appear around the props as an effect and they twinkle for a 2 seconds.
+
+
+────────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+■ Core loop 
+ - Reference: game title Green hell(survival crafting game)
+
+1. Main cut scene: Explaining the overall context and giving motivation to player.
+
+2. Quest acceptance from NPC.
+
+3. Investigation through the stage by avoiding hazard.
+
+4. Go back to basement(house)
+
+5. Report to NPC at the basement.
+
+6. Cut scene activates if the required item is in player's inventory. In the cut scene video, NPC validates what player collected and have conversation about this.
+
+7. Reward acceptance or try again : if the quest is achieved, reward will be earned but if is not, NPC say something without giving reward.
+
+8. player's craft and install function are available. This is a sandbox mode.
+
+9. player can gather the blueprint from minigame.
+     - If player interact with specific interactable object, it might trigger a minigame.
+     - Win the minigame to earn the prop blueprint or fail the minigame earning nothing.
+     - The minigame mode will be exist if the triggered minigame finished or player interacts with the "Exit minigame" button.
+
+10. Chapter complete : if player contact to NPC or interact with the object triggering the main cut scene, next chapter will process with main cut scene. If not, player will remain the sandbox mode.
+ 
+────────────────────────────────────────────────────────
+
+■ Expected scenario of core loop 1: Follow the main stream, camera of screen is 3rd person perspective which player can see the phone with proximity.
+
+0. player starts the game. 
+
+1. Player interacts with the "phone" object and clicks the Message button. Main cutscene activates.
+
+2. Player reads the quest content from the phone message.
+
+3. Current stage where player is seeing, changes to the "investigation stage". "investigation stage" is the place where player needs to investigate and collect the item which has information about target. 
+
+4. The quest required item is successfully collected through the investigation. Player presses the "back to the basement" button.
+
+5. Player is now at the basement. Contact to NPC by interacting "phone" item.
+
+6. Cut scene activates. NPC validates the item with information, what player collected from the investigation stage. NPC guides player to the next quest by giving a clue of next investigation.
+
+7. NPC gives the blueprint of prop. This prop symbolises the journey that NPC had been before.
+
+8. Player crafts and installs the prop.
+
+9. Player roam around freely, and sometimes finds a minigame which player can earn the blueprint item.
+
+10. Player interacts with "phone" item to start next quest.
+
+───────────────────────────────────────────────────────────
+
+■ Expected scenario of the loop 2: Play sandbox mode, camera of screen is 3rd person perspective and isometric like a game Signalis.
+
+0. game starts.
+1. Open the phone.
+2. click the "blueprint" button.
+3. player crafts a item for 2 seconds.
+4. The item is successfully crafted.
+5. Player installs the item on the spot where player wants.
+6. The update data of player's basement state will be saved.
+
+
+─────────────────────────────────────────────────────────
+─────────────────────────────────────────────────────────
+
+■ Quest data(mechanism): The investigation stage is a mirroring metaphor that how society treats the misogynistic violence.
+
+ID | Quest title | Location name | request item | Puzzle | Enemy attack pattern | Enemy murdering action
+
+01.| Thinker's bedroom | Cemetery | Seed, Skull | Find two request items from the soil dirt which poured down  from grave. | "Stop whining, you are running our peace.", Enemy grabs player and then apply a duct tape on player's mouth. Enemy says "Now it's peaceful." | Yanking player's ankle and then bury into the tomb.
+→ The chapter 1 quest shows how community has silence feminists or girl's negative opinion about misogynistic society by telling them "you are so sensitive".
+
+
+02.| Barn dreamer | School(1,2,3,4 floors) | Capsule pill | Find one request item from 4th floor in school. Each door which is connected to upstairs, is locked, hence player needs to find a object to unlock the door. 2nd floor door is 'Ripped blood-stained male's underwear' in 1st floor Guard room, 3rd floor door is 'Doctor's note(진단서)' in 2층 nurse's office, 4th floor door is 'Video tape named of Crying Jason' 3층 broadcasting department room. | Enemy grabs player and then scribble player's face by the lipstick. | Enemy grabs player and rip away player's face.
+→ The chapter 2 quest shows how community committed a secondary abuse against abused victim by victim blaming.
+
+
+03.| Thinker's jail | Abandoned mental hospital | Mass model, Journal diary | Find two request items from hospital. | Enemy knock over player and then squeeze player's waste by wrapping the ruler tape. Enemy says "This is how your body should be, to be treated like woman!". | Grab the player and forces to sit in the patient chair to give a surgery by ripping of the breast and womb, and saying "you don't want to be treated how people see woman? A fair risk? A fair responsibility? An Equality? you must want to be a non-woman. I will present you a gender affirmation surgery!"
+→ The chapter 3 quest shows how society manipulates girls and women and concretes the unfair social norm without understanding of social structure. it's a concept of framing woman's body into capitalised norm.
+
+
+04.| (empty) | Mansion | (empty) | Find four request items from Mansion. | (empty) | (empty)
+→ The chapter 4 quest shows 
+
+
+05.| (empty) | Lounge of mansion | (empty) | Catch a boss enemy at the lounge with NPC | Running away from player and NPC by disguising itself as a woman, a "transgender male", an "alpha male" or marginalised male.  | (None) | (None)
+→ The chapter 5 quest shows how ordinary males in various group in community committed misogyny.
+
+
+───────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+
+■ Theme field
+
+ - Player can collect items from the "Theme field" stage by simply clicking or interacting with item.
+ - Player can starts to play minigame with NPC and other players by interacting with minigame object.
+ - If player wins the minigame, then player earns buff effect for player's stat. It is similar mechanism with the people warming up before starting the running.
+ - Maximum player number for minigame play is 4. If there is no other players, player can play the minigame with NPC by choosing NPC from list. 
+
+
+ID | Minigame name | How to play | Interactive object to start the game | reward
+
+01 | Pebble stacking | Stacking the pebble one by one by balancing the pebble. It's turn-by-turn game, not only player must not collapse the pebble tower in their turn, but also click the "후퇴" button to win if the pebble tower seems like collapse no matter whose turn, just like UNO card game. | Pebble tower | Player's speed stat buff effect is on
+
+02 | Closed eyes' bluff (눈 먼 거짓말쟁이의 허풍) | Player will be given a single poker card. After card is distributed, player needs to guess the own card which is placed on player's own forehead. By looking at other player's card on their forehead, player gives a clue when it's another player's turn to ask the question to guess their card. when every player has an opportunity to ask the question, players need to bet their coin. If player believes they have the highest number among other players, then player might bet lots of Marble gem items. To earn the marble gem item or not to lose it, player needs to bet own marble gem item wisely, because they could lose the item if one of the other players have the highest number card. To win this game, player need to lose the least rate of marble gem items among players in 3 turns of minigame. It's basically similar  rule with "Blind Man's Bluff" poker game. | Bench table that poker cards are stacked near the tree or tent | Player's sanity stat increases
+
+03 | Race | Player needs to arrive at the finish line in 10 seconds by avoiding hazards. The fastest player earns the reward | Starting block on the race track | Player's speed stat buff on
+
+ID | Minigame name | How to play | Interactive object to start the game  | reward
+
+ID | Minigame name | How to play | Interactive object to start the game  | reward
+
+
+
+
+
+
+
+
+
+
+
+
