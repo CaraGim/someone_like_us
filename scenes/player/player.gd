@@ -1,18 +1,24 @@
 extends CharacterBody3D
 
+## Scoped to player-body concerns only: movement and interaction
+## raycasting. Camera mode, mouse capture, and phone-panel visibility are
+## each owned by the system they actually belong to (CameraRig,
+## HudController) via their own GameMode.mode_changed subscriptions --
+## Player does not act as a switchboard for other systems' reactions to
+## game-mode changes.
+
 @export var move_speed: float = 5.0
 @export var interact_range: float = 3.0 ## Max distance from the PLAYER (not the camera) to an aimed object.
 @export var aim_cast_distance: float = 50.0 ## How far the reticle ray reaches for aiming/highlighting purposes.
 
 var speed_multiplier: float = 1.0
 var focused_interactable: Node = null
-var _sandbox_phone_toggle: bool = false ## Only meaningful in GameMode.Mode.SANDBOX -- see _toggle_phone_in_sandbox().
 
 @onready var camera_rig: CameraRig = $CameraRig
 @onready var hud: HudController = $Hud
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 
 signal focused_interactable_changed(target: Node)
-signal phone_toggled(is_open: bool)
 
 func _ready() -> void:
 	camera_rig.target = self
@@ -23,21 +29,11 @@ func _ready() -> void:
 		var prompt_text: String = target.get_prompt() if target != null and target.has_method("get_prompt") else ""
 		hud.set_prompt(prompt_text)
 	)
-	phone_toggled.connect(hud.set_phone_open)
 
+## There's no first-person arms/body model -- hide the placeholder capsule
+## rather than let the player see the inside of their own mesh.
 func _on_game_mode_changed(mode: int) -> void:
-	camera_rig.set_mode(CameraRig.Mode.FIRST_PERSON if mode == GameMode.Mode.QUEST_STAGE else CameraRig.Mode.ISOMETRIC)
-	_refresh_phone_visibility()
-	_update_mouse_capture()
-	if mode == GameMode.Mode.QUEST_STAGE:
-		hud.center_reticle()
-
-## Phone panel visibility is DERIVED, not toggled directly: always on during
-## the Quest stage (player always carries the phone, per the GDD), only on
-## in Sandbox mode when the player has explicitly opened it via E/click.
-func _refresh_phone_visibility() -> void:
-	var should_show: bool = GameMode.current == GameMode.Mode.QUEST_STAGE or _sandbox_phone_toggle
-	phone_toggled.emit(should_show)
+	mesh_instance.visible = (mode != GameMode.Mode.QUEST_STAGE)
 
 func _unhandled_input(event: InputEvent) -> void:
 	var locked: bool = InteractionLock.is_locked()
@@ -52,7 +48,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			camera_rig.apply_rotation_step(1)
 
 	if event.is_action_pressed("toggle_phone"):
-		_toggle_phone_in_sandbox()
+		hud.toggle_phone_in_sandbox()
 
 	if event.is_action_pressed("interact") and not locked:
 		if focused_interactable != null and focused_interactable.has_method("interact"):
@@ -151,28 +147,3 @@ func _update_prompt_position() -> void:
 	if cam.is_position_behind(world_pos):
 		return
 	hud.set_prompt_screen_position(cam.unproject_position(world_pos))
-
-## Only meaningful in Sandbox mode -- in the Quest stage the phone is always
-## shown (see _refresh_phone_visibility) and this toggle has no effect,
-## since there's nothing to lock/unlock: the ambient Quest-stage phone view
-## must never block world interaction, only actively opening/using the
-## phone's functions should (see the note on InteractionLock below).
-func _toggle_phone_in_sandbox() -> void:
-	if GameMode.current != GameMode.Mode.SANDBOX:
-		return
-	_sandbox_phone_toggle = not _sandbox_phone_toggle
-	# NOTE: this is our current stand-in for "actively using the phone" --
-	# once real interactive phone-app screens exist, locking should move to
-	# "which app screen is open" rather than "is the panel visible".
-	if _sandbox_phone_toggle:
-		InteractionLock.lock()
-	else:
-		InteractionLock.unlock()
-	_refresh_phone_visibility()
-
-## Sandbox mode always has a free, visible-position cursor (it drives the
-## crosshair -- see _update_reticle_position); Quest stage always captures
-## the mouse for first-person look. The OS cursor icon itself is hidden in
-## Sandbox mode since the Reticle node is the visible custom crosshair.
-func _update_mouse_capture() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if GameMode.current == GameMode.Mode.SANDBOX else Input.MOUSE_MODE_CAPTURED

@@ -1,23 +1,26 @@
 extends Node3D
 class_name CameraRig
 
-## Owns both of the player's camera behaviors, one per game mode (see
-## autoload GameMode) -- there is no third "chase camera" mode.
-## Isometric = Sandbox mode (default, includes the basement): fixed-pitch
-## camera that orbits `target`'s position at a fixed distance via mouse
-## wheel (Don't Starve Together-style). FirstPerson = Quest stage: eye-level
-## mouse-look camera.
+## Owns both of the player's camera behaviors, one per game mode -- there is
+## no third "chase camera" mode. Subscribes to GameMode.mode_changed itself
+## (rather than being told by Player) and also owns the mouse-capture mode
+## that goes with each camera, since that's a camera concern, not a player
+## or HUD one. Isometric = Sandbox mode (default, includes the basement):
+## fixed-pitch camera that orbits `target`'s position at a fixed distance
+## via mouse wheel (Don't Starve Together-style). FirstPerson = Quest stage:
+## eye-level mouse-look camera.
 
 enum Mode { ISOMETRIC, FIRST_PERSON }
 
 @export var mouse_sensitivity: float = 0.0025
-@export var pitch_min_deg: float = -40.0
+@export var pitch_min_deg: float = -85.0 ## Steep enough to aim the crosshair at low/nearby objects at close range (not -90 exactly, to avoid the look-straight-down edge case).
 @export var pitch_max_deg: float = 70.0
 @export var iso_pitch_deg: float = 45.0
 @export var iso_distance: float = 10.0
 @export var iso_rotation_step_deg: float = 15.0
 @export var iso_look_at_height_offset: float = 2.357 ## Raises the look-at point above the player so the player renders 1/3 up from the bottom of the screen (aim reticle stays at true center) -- otherwise the reticle ray always aims straight at the player's own body.
 @export var iso_look_ahead_max_offset: float = 2.0 ## Max world-space distance the look-at point shifts toward the crosshair's screen direction (Sandbox mode only).
+@export var first_person_fov_deg: float = 60.0 ## Flatter than Godot's 75-degree default -- reduces perspective distortion that causes dizziness when rotating via mouse-look.
 
 var mode: int = Mode.ISOMETRIC
 var iso_yaw_deg: float = 0.0
@@ -28,12 +31,26 @@ var target: Node3D
 @onready var iso_rig: Node3D = $IsoRig
 @onready var iso_camera: Camera3D = $IsoRig/IsoCamera
 
+func _ready() -> void:
+	GameMode.mode_changed.connect(_on_game_mode_changed)
+	_on_game_mode_changed(GameMode.current)
+
+func _on_game_mode_changed(game_mode: int) -> void:
+	set_mode(Mode.FIRST_PERSON if game_mode == GameMode.Mode.QUEST_STAGE else Mode.ISOMETRIC)
+
 func set_mode(new_mode: int) -> void:
 	mode = new_mode
 	first_person_camera.current = (mode == Mode.FIRST_PERSON)
 	iso_camera.current = (mode == Mode.ISOMETRIC)
+	if mode == Mode.FIRST_PERSON:
+		first_person_camera.fov = first_person_fov_deg
 	if mode == Mode.ISOMETRIC:
 		update_iso_tracking()
+	# Sandbox has a free, visible-position cursor (drives the crosshair);
+	# Quest stage captures the mouse for first-person look. The OS cursor
+	# icon is hidden in Sandbox since the Reticle node (HudController) is
+	# the visible custom crosshair.
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if mode == Mode.ISOMETRIC else Input.MOUSE_MODE_CAPTURED
 
 func apply_mouse_look(relative: Vector2) -> void:
 	if mode != Mode.FIRST_PERSON:

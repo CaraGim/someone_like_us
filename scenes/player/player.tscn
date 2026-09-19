@@ -32,6 +32,7 @@ script = ExtResource("2_camerarig")
 [node name="FirstPersonPivot" type="Node3D" parent="CameraRig" unique_id=1310186595]
 
 [node name="FirstPersonCamera" type="Camera3D" parent="CameraRig/FirstPersonPivot" unique_id=25973199]
+far = 30.0
 
 [node name="IsoRig" type="Node3D" parent="CameraRig" unique_id=596208149]
 
