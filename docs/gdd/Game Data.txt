@@ -67,7 +67,10 @@ Crafting completed: Effect activates when the prop item is crafted completely.
 
 Install: Effect activates when player installs the prop on the spot.
 
-
+Animal affirmation: Effect activate when dirtiness in basement reduced to half of the gauge. This will be activate for 2 seconds.
+ - animal animation of "Animal brush itself against player"
+ - audio "Happy purring noises"
+ - screen effect that vignetting of pink color
 
 ────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────
@@ -81,6 +84,23 @@ Install: Effect activates when player installs the prop on the spot.
 ────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────
 
+■ Player's basement 
+
+- Number of prop(int): count the number of prop.
+- Dirtiness(int): 1 to 70
+
+- is player not here(toggle): Yes / No
+- pet zoomie start(toggle): if location of player hasn't been in this place for longer than 60 seconds in real time, then it turns on. player's pet will move around installed prop.
+- Animal Filth Created(int): 1 to 10
+- Prop Knocked Over(toggle): The rotation position of installed prop item gets 90 degree in X axis or Z axis.
+
+- player start to clean(toggle): if player clean the firth or fix the knocked installed prop's axis to 0.
+- is pet petted or hugged(toggle): if pet is petted by player or not.
+- is it half clean(toggle): if the dirtiness become 5 after player start to clean the basement.
+- reward of cleaning: pet activates effect of "Aniaml affirmation".
+
+──────────────────────────────────────────────────────────
+──────────────────────────────────────────────────────────
 
 ■ Stage (this stage information is about sandbox mode stage excluding the quest data such as quest required items. because these items will be placed randomly whenever player enters to the stage).
 

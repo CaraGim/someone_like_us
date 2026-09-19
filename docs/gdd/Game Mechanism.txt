@@ -28,7 +28,7 @@ Interacting with object: Press F Key or Click the object.
 - Health: 
  - Total 3 times of tolerance from interaction with the enemy. if player interacts with enemy with 3 times at a investigation stage, then game is over. Player will start from the basement after game over.
 
-- Artistic: 
+- Artistic: (empty)
 
 - Speed: Player movement animation speed. if player is in a 'speed buff' on, then the animation speed becomes x2.0. this will maintain while player is in stage. Once player moves to basement, this buff effect turns off.
 
@@ -114,6 +114,9 @@ Install: 10px of 3 star shape sprites will appear around the props as an effect 
 4. The item is successfully crafted.
 5. Player installs the item on the spot where player wants.
 6. The update data of player's basement state will be saved.
+7. If there is an animal in player's basement, the "Dirtiness" increase +1.
+8. Player cleans the basement.
+9. Player earns the reward that player's animal shows the affirmation(animation and effect) to player. 
 
 
 ─────────────────────────────────────────────────────────
@@ -169,6 +172,104 @@ ID | Minigame name | How to play | Interactive object to start the game  | rewar
 
 
 
+─────────────────────────────────────────────────────
+─────────────────────────────────────────────────────
+
+■ Player's basement 
+
+Basement cleanliness system: 
+This is no-mandatory minigame that  player can enjoy by cleaning the mess of animal made.
+If player brings the animal into the player's basement, the animal will do "Zoomie" which is running around the basement and make a mess just like what pets do in reality.
+ - if player install the animal in the player's basement, the "dirtiness" gauge activates. Game should count the number of animal filth and knocked installed prop. If animal in player's basement, touches the installed prop or produce the animal filth, then the number of "dirtiness" +1. while if player clean, then the number of "dirtiness" gets reduced -1.
+ - What to do: Player cleans the animal filth or fix the knocked installed prop.
+ - How to clean the animal filth or fix the prop: Player clicks the animal filth or click the knocked installed prop.
+ - How to stop the animal zoomie: Player hugs the animal or pets the animal by clicking or by interacting with the animal.
+ - How frequently animal zoomie happens, and what will happen: Animal will start zoomie when the part of basement is empty(player is not here) for longer than 60 seconds in real time(animal will zoomie in this empty place). The frequent of animal zoomie depends on the number of installed prop in player's basement. 
+ ⓐ Less than 5 props: 1 zoomie and 10 filth / 300 seconds. 
+ ⓑ 6-10 props: 1 zoomie and 10 filth  / 240 seconds.
+ ⓒ 11-15 props: 1 zoomie and 10 filth  / 180 seconds.
+ ⓓ over 20 props: 1 zoomie and 10 filth  / 120 seconds.
+
+ - Reward: Animal shows an affirmation to player. Nothing functionally affecting to player's ability or something making the game easier.
+
+─────────────────────────────────────────────────────────
+
+■ The animal which player can have as pet(collectable item):
+15 | cat | Adorable friend. It likes some eggs and blueberry, banana.  
+16 | crow | Smart friend. It likes some egg, and fruits. Sometimes gives me a marble gem. 
+17 | spider | Gorgeous fuzzy friend. It gives me a web.
+18 | dog | Loyal friend. It likes some egg and fruits.   
+19 | quail | Talkative friend. It gives me few eggs once a week. It likes fruits and seeds. 
+30 | butterfly | Beautiful friend. It gives me a butter once a week if the flower is provided.
+31 | bee | Hard worker friend. It gives me honey once a week if the flower is provided.
+
+─────────────────────────────────────────────────────────
+
+■ Loop of Basement cleanliness system:
+
+1. Place Animal in Basement
+Player installs an animal in the basement.
+The Dirtiness Gauge becomes active.
+The game starts monitoring animal behaviour.
+
+2. Basement Becomes Empty
+If no player character is present in that basement area for 60 seconds of real time, the animal enters an idle state eligible for Zoomies.
+
+3. Animal Starts Zoomie
+Animal runs around the basement.
+During Zoomie:
+- Creates animal filth.
+- Can collide with installed props.
+- Props become "Knocked Over" when hit.
+Each mess event increases Dirtiness.
+
+Dirtiness Formula: 
+- Animal Filth Created = +1 Dirtiness
+- Prop Knocked Over = +1 Dirtiness
+
+4. Dirtiness Accumulates
+The Dirtiness Gauge represents:
+Current Dirtiness = (Number of Filth Objects) + (Number of Knocked Over Props)
+
+Examples:
+5 filth + 3 toppled props = Dirtiness 8
+10 filth + 0 toppled props = Dirtiness 10
+
+5. Player Returns
+
+Player notices:
+- Dirtiness Gauge value.
+- Visible filth objects.
+- Knocked-over props.
+- Zooming animal (if still active).
+
+6. Player Interacts
+
+Player has two choices:
+1) Clean Basement
+Click on:
+- Animal filth → removes filth.
+- Knocked-over prop → restores prop.
+Each successful cleaning action: Dirtiness -1
+
+2) Calm Animal
+Click or interact with animal:
+- Hug Animal
+- Pet Animal
+Result:
+Zoomie immediately stops. Animal returns to normal behaviour.
+
+7. Dirtiness Removed
+When all messes are cleaned:
+Dirtiness = 0
+Basement returns to a clean state.
+
+8. Reward Interaction
+Animal displays: Animal affirmation effct.
+Examples of "Animal affirmation" effect: play the animal animation of "Animal brush itself against player", play the audio "Happy purring noises", activate the screen effect that vignetting of pink color for a 2 seconds.
+
+9. Repeat
+When basement becomes unattended again, the Zoomie timer continues and the cycle repeats.
 
 
 
