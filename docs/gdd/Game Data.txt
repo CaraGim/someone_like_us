@@ -5,11 +5,11 @@
 
 - Movement: Press W,A,S,D Key
 
-- Screen rotation: Mouse movement
+- Screen rotation(Quest stage, first person camera): Mouse movement
 
 - Screen rotation(Basement / sandbox isometric camera): Mouse wheel scroll. Scroll up = anti-clockwise, scroll down = clockwise.
 
-- Checking player's phone: Click the phone or Press E Key
+- Checking player's phone: Click the phone or Press E Key. Player always carries the phone as personal equipment. Phone panel is always on screen during Quest stage(first person camera); toggled by E key / click in Sandbox mode(isometric camera).
 
 - Interacting with object: Press F Key or Click the object.
 
@@ -21,9 +21,11 @@
 
 ■ Camera
 
+- Camera mode(enum): Isometric(Sandbox mode, default, includes basement) / First person(Quest stage). Exactly one of these two is active at any time -- there is no separate third-person camera.
 - Isometric camera rotation step(float): degrees the camera orbits per mouse wheel scroll tick. Placeholder default: 15 degrees.
 - Isometric camera rotation limit: None(camera can orbit the full 360 degrees around the player).
 - Isometric camera pitch(float): fixed downward viewing angle, unaffected by mouse wheel input. Placeholder default: 45 degrees.
+- Phone panel visibility(bool): Always true during Quest stage(first person camera). In Sandbox mode(isometric camera), toggled by the E key / click(see Key bind).
 
 
 ────────────────────────────────────────────────────────────

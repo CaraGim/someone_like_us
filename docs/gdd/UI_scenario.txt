@@ -21,6 +21,14 @@
 ───────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────
 
+■ Camera mode & phone panel visibility
+
+- Quest stage(investigation stages): Camera is first person. Because player always carries the phone as personal equipment, the phone panel(described below) is permanently shown on screen for the entire stage -- no key press needed to bring it up.
+- Sandbox mode(default, includes player's basement): Camera is isometric(3rd person, Don't Starve Together-style mouse wheel rotation). The phone is not ambiently in view here, so pressing E key or clicking the phone object opens the phone panel on demand, and it closes the same way(see "Close the phone" below).
+
+───────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
 ■ Pick up the phone
  - Each button on the phone looks like smartphone application icon.
 
@@ -49,6 +57,8 @@ Back: Go back to the previous screen on the phone.
 
 
 ■ Default screen of phone object.
+
+ - This is the screen shown whenever the phone panel is visible: permanently during Quest stage(first person camera), or after opening it via E key/click during Sandbox mode(isometric camera).
 
  - Time: it's following day-night cycle system. Morning/ Brunch time / Lunch / Afternoon / Sundown / Dinner / Night / Midnight / Sunrise. this UI will be like small text on the top of screen, and the phone screen background shifts by the time. For example, if the time in the game is "Sundown", then player's phone screen  shows orange background colour and sunset illustration.
  
@@ -116,6 +126,7 @@ Order | What UI player interacts | What will happen from interaction
 
 ■ check the blueprint
 
+(Crafting/blueprint checking happens in Sandbox mode/the basement, where the phone panel is opened on demand via E key/click -- see "Camera mode & phone panel visibility" above.)
 
 Blueprint Scenario 1 (Blueprint item is not listed) : player press E key or click the phone item object -> Phone screen pop up -> player clicks blueprint app icon on the phone screen -> If no blueprint item player obtained yet, the text appears "No blueprint for now. Ask your friend." on phone screen. -> player press "back" button -> close the blueprint app.
 

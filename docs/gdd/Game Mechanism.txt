@@ -9,7 +9,7 @@ Movement: Press W,A,S,D Key
  - Research average games which use W,A,S,D as player movement key bind, and apply it.
 
 
-Screen rotation: Mouse movement
+Screen rotation (Quest stage, first person camera): Mouse movement
 
 
 Screen rotation (Basement / sandbox mode, isometric camera): Mouse wheel scroll.
@@ -21,10 +21,20 @@ Screen rotation (Basement / sandbox mode, isometric camera): Mouse wheel scroll.
 Checking player's phone: Click the phone or Press E Key
  - Player's phone has these functions with each button: Checking the quest information and progress(Quest information, required task to complete), checking the map to brows current location, checking the collected item list with information.
  - Player is able to check the phone while player is moving, but player can not interact with a object item while player is checking the phone.
+ - Player always carries the phone as personal equipment(it is not a separate object player finds/picks up in the world). During the Quest stage(first person camera), the phone is naturally in the player's own view at all times, so the phone panel is always visible on screen for the whole stage without needing to press the key. In Sandbox / basement mode(isometric camera), the phone is not ambiently in view, so the E key / click still opens and closes the phone panel as described above.
 
 
 Interacting with object: Press F Key or Click the object.
- - The interaction available object item should be only one in the screen. The standard of "which object item will be interaction available" is that a invisible dot(150px) in centre of screen exactly aims to object item on the screen. When the object item is available to click, then the screen will be a bit blur except the object item. Because the interactable object item must be emphasized to give player a signal that "this object item is interactable". 
+ - The interaction available object item should be only one in the screen. The standard of "which object item will be interaction available" is that a invisible dot(150px) in centre of screen exactly aims to object item on the screen. When the object item is available to click, then the screen will be a bit blur except the object item. Because the interactable object item must be emphasized to give player a signal that "this object item is interactable".
+
+────────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────
+
+■ Camera mode per game mode
+
+- Sandbox mode(default, includes player's basement): Isometric camera. This is the camera the player normally sees.
+- Quest stage(investigation stages): First person camera. Entering a quest stage switches the camera to first person; leaving it (returning to the basement) switches back to the isometric sandbox camera.
+- There is no separate third-person "follow" camera -- only these two camera modes exist, one per game mode.
 
 ────────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────
@@ -85,7 +95,7 @@ Install: 10px of 3 star shape sprites will appear around the props as an effect 
  
 ────────────────────────────────────────────────────────
 
-■ Expected scenario of core loop 1: Follow the main stream, camera of screen is 3rd person perspective which player can see the phone with proximity.
+■ Expected scenario of core loop 1: Follow the main stream, camera of screen is first person perspective(Quest stage camera). Because player always carries the phone, the phone panel is always visible on screen throughout this loop.
 
 0. player starts the game. 
 
@@ -111,7 +121,7 @@ Install: 10px of 3 star shape sprites will appear around the props as an effect 
 
 ───────────────────────────────────────────────────────────
 
-■ Expected scenario of the loop 2: Play sandbox mode, camera of screen is 3rd person perspective and isometric like a game Signalis.
+■ Expected scenario of the loop 2: Play sandbox mode(default game mode), camera of screen is 3rd person perspective and isometric like a game Signalis.
 
 0. game starts.
 1. Open the phone.
