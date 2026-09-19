@@ -18,6 +18,11 @@ Screen rotation (Basement / sandbox mode, isometric camera): Mouse wheel scroll.
  - Reference: same style of camera rotation control as Don't Starve Together. Only the camera's yaw(orbit angle around the player) changes; the fixed isometric pitch angle does not change.
 
 
+Crosshair movement (Basement / sandbox mode, isometric camera): Mouse movement.
+ - The crosshair is not fixed at the centre of the screen in this mode -- it follows the mouse cursor's position on screen instead. Mouse movement does not rotate the camera in this mode; only the mouse wheel does(see above).
+ - The isometric camera also applies a subtle "look-ahead" shift: the camera's view nudges slightly toward whatever direction the crosshair currently points, so the player can peek a little further in that direction. This shift is gentle (a small, capped world-space offset), not a full screen-edge pan, and it eases back toward the player as the crosshair returns near the centre of the screen.
+
+
 Checking player's phone: Click the phone or Press E Key
  - Player's phone has these functions with each button: Checking the quest information and progress(Quest information, required task to complete), checking the map to brows current location, checking the collected item list with information.
  - Player is able to check the phone while player is moving, but player can not interact with a object item while player is checking the phone.
@@ -25,14 +30,17 @@ Checking player's phone: Click the phone or Press E Key
 
 
 Interacting with object: Press F Key or Click the object.
- - The interaction available object item should be only one in the screen. The standard of "which object item will be interaction available" is that a invisible dot(150px) in centre of screen exactly aims to object item on the screen. When the object item is available to click, then the screen will be a bit blur except the object item. Because the interactable object item must be emphasized to give player a signal that "this object item is interactable".
+ - The interaction available object item should be only one in the screen. The standard of "which object item will be interaction available" is that the crosshair exactly aims to object item on the screen.
+ - Quest stage(first person camera): the crosshair is the invisible dot(150px) fixed at the centre of the screen, as described above.
+ - Sandbox / basement mode(isometric camera): the crosshair follows the mouse cursor instead of staying fixed at centre(see "Crosshair movement" above), so the player aims by pointing the mouse at the object.
+ - When the object item is available to click, then the screen will be a bit blur except the object item. Because the interactable object item must be emphasized to give player a signal that "this object item is interactable".
 
 ────────────────────────────────────────────────────────────
 ───────────────────────────────────────────────────────────
 
 ■ Camera mode per game mode
 
-- Sandbox mode(default, includes player's basement): Isometric camera. This is the camera the player normally sees.
+- Sandbox mode(default, includes player's basement): Isometric camera. This is the camera the player normally sees. In this mode, the mouse cursor also drives the crosshair position and a subtle camera look-ahead shift -- see "Crosshair movement" under Key bind and its function.
 - Quest stage(investigation stages): First person camera. Entering a quest stage switches the camera to first person; leaving it (returning to the basement) switches back to the isometric sandbox camera.
 - There is no separate third-person "follow" camera -- only these two camera modes exist, one per game mode.
 

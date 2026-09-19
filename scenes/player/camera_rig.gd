@@ -17,6 +17,7 @@ enum Mode { ISOMETRIC, FIRST_PERSON }
 @export var iso_distance: float = 10.0
 @export var iso_rotation_step_deg: float = 15.0
 @export var iso_look_at_height_offset: float = 2.357 ## Raises the look-at point above the player so the player renders 1/3 up from the bottom of the screen (aim reticle stays at true center) -- otherwise the reticle ray always aims straight at the player's own body.
+@export var iso_look_ahead_max_offset: float = 2.0 ## Max world-space distance the look-at point shifts toward the crosshair's screen direction (Sandbox mode only).
 
 var mode: int = Mode.ISOMETRIC
 var iso_yaw_deg: float = 0.0
@@ -52,9 +53,31 @@ func update_iso_tracking() -> void:
 	var yaw: float = deg_to_rad(iso_yaw_deg)
 	var pitch: float = deg_to_rad(iso_pitch_deg)
 	var look_at_point: Vector3 = target.global_position + Vector3(0, iso_look_at_height_offset, 0)
+	look_at_point += _compute_look_ahead_offset(yaw)
 	var offset: Vector3 = Vector3(0, 0, iso_distance).rotated(Vector3.RIGHT, -pitch).rotated(Vector3.UP, yaw)
 	iso_rig.global_position = look_at_point + offset
 	iso_rig.look_at(look_at_point, Vector3.UP)
+
+## Subtle look-ahead: nudges the look-at point toward wherever the crosshair
+## (mouse cursor, in Sandbox mode) currently is relative to screen-center,
+## scaled by how far off-center it is and capped by iso_look_ahead_max_offset.
+func _compute_look_ahead_offset(yaw: float) -> Vector3:
+	var viewport: Viewport = get_viewport()
+	if viewport == null:
+		return Vector3.ZERO
+	var viewport_size: Vector2 = viewport.get_visible_rect().size
+	if viewport_size.x <= 0.0 or viewport_size.y <= 0.0:
+		return Vector3.ZERO
+	var center: Vector2 = viewport_size / 2.0
+	var mouse_pos: Vector2 = viewport.get_mouse_position()
+	var normalized: Vector2 = Vector2(
+		(mouse_pos.x - center.x) / center.x,
+		(mouse_pos.y - center.y) / center.y
+	)
+	normalized = normalized.limit_length(1.0)
+	var world_right: Vector3 = Vector3(1, 0, 0).rotated(Vector3.UP, yaw)
+	var world_forward: Vector3 = Vector3(0, 0, -1).rotated(Vector3.UP, yaw)
+	return (world_right * normalized.x + world_forward * -normalized.y) * iso_look_ahead_max_offset
 
 func get_active_camera() -> Camera3D:
 	return first_person_camera if mode == Mode.FIRST_PERSON else iso_camera

@@ -24,11 +24,13 @@ func _ready() -> void:
 		hud.set_prompt(prompt_text)
 	)
 	phone_toggled.connect(hud.set_phone_open)
-	_update_mouse_capture()
 
 func _on_game_mode_changed(mode: int) -> void:
 	camera_rig.set_mode(CameraRig.Mode.FIRST_PERSON if mode == GameMode.Mode.QUEST_STAGE else CameraRig.Mode.ISOMETRIC)
 	_refresh_phone_visibility()
+	_update_mouse_capture()
+	if mode == GameMode.Mode.QUEST_STAGE:
+		hud.center_reticle()
 
 ## Phone panel visibility is DERIVED, not toggled directly: always on during
 ## the Quest stage (player always carries the phone, per the GDD), only on
@@ -66,8 +68,23 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	_process_movement(delta)
 	camera_rig.update_iso_tracking()
+	_update_reticle_position()
 	_update_focused_interactable()
 	_update_prompt_position()
+
+## In Sandbox mode the crosshair follows the mouse cursor; in Quest stage it
+## stays fixed at true screen-center (set once by hud.center_reticle() on
+## mode change), so there's nothing to update here in that mode.
+func _update_reticle_position() -> void:
+	if camera_rig.mode == CameraRig.Mode.ISOMETRIC:
+		hud.set_reticle_screen_position(get_viewport().get_mouse_position())
+
+## Screen point the interact raycast aims through: the mouse cursor in
+## Sandbox mode, true screen-center in Quest stage.
+func _get_aim_screen_point() -> Vector2:
+	if camera_rig.mode == CameraRig.Mode.ISOMETRIC:
+		return get_viewport().get_mouse_position()
+	return get_viewport().get_visible_rect().size / 2.0
 
 func _process_movement(delta: float) -> void:
 	var input_dir := Vector2.ZERO
@@ -102,10 +119,9 @@ func _update_focused_interactable() -> void:
 	var cam: Camera3D = camera_rig.get_active_camera()
 	if cam == null:
 		return
-	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var screen_center: Vector2 = viewport_size / 2.0
-	var from: Vector3 = cam.project_ray_origin(screen_center)
-	var to: Vector3 = from + cam.project_ray_normal(screen_center) * aim_cast_distance
+	var aim_point: Vector2 = _get_aim_screen_point()
+	var from: Vector3 = cam.project_ray_origin(aim_point)
+	var to: Vector3 = from + cam.project_ray_normal(aim_point) * aim_cast_distance
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(from, to)
 	query.collide_with_areas = true
@@ -152,8 +168,11 @@ func _toggle_phone_in_sandbox() -> void:
 		InteractionLock.lock()
 	else:
 		InteractionLock.unlock()
-	_update_mouse_capture()
 	_refresh_phone_visibility()
 
+## Sandbox mode always has a free, visible-position cursor (it drives the
+## crosshair -- see _update_reticle_position); Quest stage always captures
+## the mouse for first-person look. The OS cursor icon itself is hidden in
+## Sandbox mode since the Reticle node is the visible custom crosshair.
 func _update_mouse_capture() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if _sandbox_phone_toggle else Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if GameMode.current == GameMode.Mode.SANDBOX else Input.MOUSE_MODE_CAPTURED

@@ -9,6 +9,8 @@
 
 - Screen rotation(Basement / sandbox isometric camera): Mouse wheel scroll. Scroll up = anti-clockwise, scroll down = clockwise.
 
+- Crosshair movement(Basement / sandbox isometric camera): Mouse movement. Crosshair follows the mouse cursor instead of staying fixed at screen centre; mouse movement does not rotate the camera in this mode(only mouse wheel does).
+
 - Checking player's phone: Click the phone or Press E Key. Player always carries the phone as personal equipment. Phone panel is always on screen during Quest stage(first person camera); toggled by E key / click in Sandbox mode(isometric camera).
 
 - Interacting with object: Press F Key or Click the object.
@@ -26,6 +28,10 @@
 - Isometric camera rotation limit: None(camera can orbit the full 360 degrees around the player).
 - Isometric camera pitch(float): fixed downward viewing angle, unaffected by mouse wheel input. Placeholder default: 45 degrees.
 - Phone panel visibility(bool): Always true during Quest stage(first person camera). In Sandbox mode(isometric camera), toggled by the E key / click(see Key bind).
+- Crosshair position(Vector2, screen space): Fixed at exact screen centre during Quest stage(first person camera). Follows the mouse cursor's screen position during Sandbox mode(isometric camera).
+- Isometric camera look-ahead max offset(float): maximum world-space distance the camera's look-at point can shift toward the crosshair's direction. Placeholder default: 2.0 meters.
+- Isometric camera look-ahead behaviour: The shift scales smoothly with how far the crosshair currently is from screen centre(0 at centre, up to the max offset at the screen edge), and eases back toward the player as the crosshair returns to centre.
+- First person camera FOV(float): default 60 degrees, narrower than typical to reduce rotation-induced disorientation.
 
 
 ────────────────────────────────────────────────────────────
