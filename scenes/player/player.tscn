@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dmppc5wi01hqn"]
+
+[ext_resource type="Script" uid="uid://d15sn81tjmth4" path="res://scenes/player/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://brqwucxv0fwlk" path="res://scenes/player/camera_rig.gd" id="2_camerarig"]
+[ext_resource type="Script" uid="uid://dxvmg8c5fq4es" path="res://scenes/player/hud_controller.gd" id="3_hud"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.5, 0.9, 1)
+
+[node name="Player" type="CharacterBody3D" unique_id=2048264529]
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=53807045]
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1410962288]
+mesh = SubResource("CapsuleMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=1126613645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+script = ExtResource("2_camerarig")
+
+[node name="FirstPersonPivot" type="Node3D" parent="CameraRig" unique_id=1310186595]
+
+[node name="FirstPersonCamera" type="Camera3D" parent="CameraRig/FirstPersonPivot" unique_id=25973199]
+
+[node name="IsoRig" type="Node3D" parent="CameraRig" unique_id=596208149]
+
+[node name="IsoCamera" type="Camera3D" parent="CameraRig/IsoRig" unique_id=27324267]
+projection = 1
+current = true
+size = 10.0
+
+[node name="Hud" type="CanvasLayer" parent="." unique_id=304927347]
+script = ExtResource("3_hud")
+
+[node name="Reticle" type="ColorRect" parent="Hud" unique_id=454667041]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0.6)
+
+[node name="PromptLabel" type="Label" parent="Hud" unique_id=689339120]
+visible = false
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="PhonePanel" type="ColorRect" parent="Hud" unique_id=1078412]
+visible = false
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -279.00006
+offset_top = -134.0
+offset_right = -25.961914
+offset_bottom = 308.81726
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.13962634
+color = Color(0.05, 0.05, 0.08, 0.95)

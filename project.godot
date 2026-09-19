@@ -11,13 +11,25 @@ config_version=5
 [application]
 
 config/name="someone_like_us"
+run/main_scene="res://scenes/test/test_level.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+InputSetup="*res://autoload/input_setup.gd"
+InteractionLock="*res://autoload/interaction_lock.gd"
+GameMode="*res://autoload/game_mode.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="interactable"
 
 [physics]
 
