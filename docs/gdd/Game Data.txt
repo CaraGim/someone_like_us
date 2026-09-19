@@ -7,10 +7,23 @@
 
 - Screen rotation: Mouse movement
 
+- Screen rotation(Basement / sandbox isometric camera): Mouse wheel scroll. Scroll up = anti-clockwise, scroll down = clockwise.
+
 - Checking player's phone: Click the phone or Press E Key
 
 - Interacting with object: Press F Key or Click the object.
 
+
+
+────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
+
+
+■ Camera
+
+- Isometric camera rotation step(float): degrees the camera orbits per mouse wheel scroll tick. Placeholder default: 15 degrees.
+- Isometric camera rotation limit: None(camera can orbit the full 360 degrees around the player).
+- Isometric camera pitch(float): fixed downward viewing angle, unaffected by mouse wheel input. Placeholder default: 45 degrees.
 
 
 ────────────────────────────────────────────────────────────

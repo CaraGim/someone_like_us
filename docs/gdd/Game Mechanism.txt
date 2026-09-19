@@ -12,6 +12,12 @@ Movement: Press W,A,S,D Key
 Screen rotation: Mouse movement
 
 
+Screen rotation (Basement / sandbox mode, isometric camera): Mouse wheel scroll.
+ - Scroll up: rotate camera anti-clockwise around the player.
+ - Scroll down: rotate camera clockwise around the player.
+ - Reference: same style of camera rotation control as Don't Starve Together. Only the camera's yaw(orbit angle around the player) changes; the fixed isometric pitch angle does not change.
+
+
 Checking player's phone: Click the phone or Press E Key
  - Player's phone has these functions with each button: Checking the quest information and progress(Quest information, required task to complete), checking the map to brows current location, checking the collected item list with information.
  - Player is able to check the phone while player is moving, but player can not interact with a object item while player is checking the phone.
