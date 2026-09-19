@@ -89,8 +89,13 @@ Animal affirmation: Effect activate when dirtiness in basement reduced to half o
 - Number of prop(int): count the number of prop.
 - Dirtiness(int): 1 to 70
 
-- is player not here(toggle): Yes / No
-- pet zoomie start(toggle): if location of player hasn't been in this place for longer than 60 seconds in real time, then it turns on. player's pet will move around installed prop.
+- Animal home position(Vector3): the installed location of the animal, set the same way as installing a prop. Used as the reference point for presence detection(no basement room partition needed).
+- Presence radius(float): 5.0 meters(placeholder default, tune after basement greybox scale is finalized).
+- Player-away timer(float): 0 to 60. Increases by 1 per second while distance(player, Animal home position) > Presence radius. Resets to 0 the moment player comes back within Presence radius.
+- Zoomie cooldown timer(float): counts down from the interval matching the current "Number of prop" bracket(300 / 240 / 180 / 120 seconds). A new zoomie cannot start until this reaches 0.
+
+- is player not here(toggle): Yes / No. True when Player-away timer > 0(i.e. player is currently outside the Presence radius).
+- pet zoomie start(toggle): turns on when Player-away timer reaches 60 AND Zoomie cooldown timer is 0. player's pet will move around installed prop.
 - Animal Filth Created(int): 1 to 10
 - Prop Knocked Over(toggle): The rotation position of installed prop item gets 90 degree in X axis or Z axis.
 

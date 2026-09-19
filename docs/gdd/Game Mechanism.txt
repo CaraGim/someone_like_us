@@ -184,11 +184,13 @@ If player brings the animal into the player's basement, the animal will do "Zoom
  - What to do: Player cleans the animal filth or fix the knocked installed prop.
  - How to clean the animal filth or fix the prop: Player clicks the animal filth or click the knocked installed prop.
  - How to stop the animal zoomie: Player hugs the animal or pets the animal by clicking or by interacting with the animal.
- - How frequently animal zoomie happens, and what will happen: Animal will start zoomie when the part of basement is empty(player is not here) for longer than 60 seconds in real time(animal will zoomie in this empty place). The frequent of animal zoomie depends on the number of installed prop in player's basement. 
- ⓐ Less than 5 props: 1 zoomie and 10 filth / 300 seconds. 
- ⓑ 6-10 props: 1 zoomie and 10 filth  / 240 seconds.
- ⓒ 11-15 props: 1 zoomie and 10 filth  / 180 seconds.
- ⓓ over 20 props: 1 zoomie and 10 filth  / 120 seconds.
+ - How the game decides "player is not here"(no basement room partition needed): The game measures the distance between the player and the "Animal home position"(the spot where the animal was installed, same as installing a prop). If that distance stays greater than the "Presence radius" continuously for 60 seconds in real time, the animal becomes eligible to start a Zoomie. Re-entering the Presence radius resets this 60-second timer back to 0, but it does NOT stop a Zoomie that has already started — only hugging/petting stops an active Zoomie.
+ - Presence radius: 5 meters(placeholder default value, adjust once the basement's greybox scale is finalized).
+ - How frequently animal zoomie happens, and what will happen: The seconds below are the minimum cooldown between Zoomie events, not a guarantee. A Zoomie can only actually start once this cooldown has elapsed AND the player has been outside the Presence radius for the full 60 seconds described above. The frequency depends on the number of installed prop in player's basement. 
+ ⓐ Less than 5 props: 1 zoomie and 10 filth / 300 seconds cooldown. 
+ ⓑ 6-10 props: 1 zoomie and 10 filth  / 240 seconds cooldown.
+ ⓒ 11-15 props: 1 zoomie and 10 filth  / 180 seconds cooldown.
+ ⓓ over 20 props: 1 zoomie and 10 filth  / 120 seconds cooldown.
 
  - Reward: Animal shows an affirmation to player. Nothing functionally affecting to player's ability or something making the game easier.
 
@@ -212,8 +214,8 @@ Player installs an animal in the basement.
 The Dirtiness Gauge becomes active.
 The game starts monitoring animal behaviour.
 
-2. Basement Becomes Empty
-If no player character is present in that basement area for 60 seconds of real time, the animal enters an idle state eligible for Zoomies.
+2. Player Leaves the Animal's Presence Radius
+If the player's distance from the Animal home position stays greater than the Presence radius for 60 continuous seconds of real time, the animal enters an idle state eligible for Zoomies(this also requires the Zoomie cooldown from the frequency table to have elapsed).
 
 3. Animal Starts Zoomie
 Animal runs around the basement.
