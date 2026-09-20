@@ -30,6 +30,18 @@ Build real, working logic first. Presentation-layer stubs exist only so the stru
 
 
 
+## Branching strategy
+
+This project uses a lightweight two-tier branching model (a scaled-down Feature Branch Workflow, not full Gitflow -- no release/hotfix branches yet since there are no shipped builds).
+
+* **`main`** -- stable, playable states only. Only merge here once a piece of work has been manually tested and confirmed working (e.g. after the user checks it in the Godot editor/game). This is what would get tagged as a build version later.
+* **`develop`** -- integration branch. Finished feature work lands here first, before it's confirmed stable enough for `main`.
+* **`feature/<name>`** -- one branch per chunk of work (e.g. `feature/quest-state-tracking`), branched off `develop`. Merge back to `develop` when it works, then the branch can be deleted.
+
+Default to creating/working on a `feature/*` branch for new work rather than committing directly to `develop` or `main`. Ask before merging a feature branch up to `develop`, and before merging/fast-forwarding `develop` into `main` -- both are the user's call, not automatic once code compiles.
+
+
+
 ## Known gotcha: hidden non-breaking spaces in docs/gdd/*.txt
 
 The `.txt` files in `docs/gdd/` (likely pasted from Word/Notion/similar rich-text editors) contain hidden **non-breaking space characters (U+00A0)** mixed in among normal spaces (U+0020) — visually identical but byte-different.
