@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/quest_data.gd" id="1_quest_data"]
+
+[resource]
+script = ExtResource("1_quest_data")
+id = 1
+title = "Thinker's bedroom"
+location_name = "Cemetery"
+request_items = Array[String](["seed", "skull"])
+puzzle_description = "Find two request items from the soil dirt which poured down from grave."
+enemy_attack_pattern = "\"Stop whining, you are running our peace.\" Enemy grabs player and then applies duct tape on player's mouth. Enemy says \"Now it's peaceful.\""
+enemy_murder_action = "Yanking player's ankle and then bury into the tomb."
+reward_blueprint_id = "plant_pot"
+thematic_note = "The chapter 1 quest shows how community has silenced feminists' or girls' negative opinions about misogynistic society by telling them \"you are so sensitive\"."

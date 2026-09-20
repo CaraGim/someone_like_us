@@ -1,0 +1,102 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/stage_transition.gd" id="3_stage_transition"]
+[ext_resource type="Script" path="res://scripts/collectible_item.gd" id="4_collectible"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(40, 1, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(40, 1, 40)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.22, 0.24, 0.2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gate"]
+size = Vector3(1.5, 2.2, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gate"]
+size = Vector3(1.5, 2.2, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gate"]
+albedo_color = Color(0.5, 0.3, 0.3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_item"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_item"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_seed"]
+albedo_color = Color(0.6, 0.8, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skull"]
+albedo_color = Color(0.9, 0.9, 0.85, 1)
+
+[node name="Cemetery" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8, -0.4, 0.4, 0, 0.7, 0.7, -0.6, -0.6, 0.6, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
+
+[node name="BasementGate" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 9)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_stage_transition")
+target_scene_path = "res://scenes/stages/basement.tscn"
+target_mode = 0
+prompt_text = "F key to return to the Basement"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasementGate"]
+shape = SubResource("BoxShape3D_gate")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasementGate"]
+mesh = SubResource("BoxMesh_gate")
+surface_material_override/0 = SubResource("StandardMaterial3D_gate")
+
+[node name="SeedItem" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.2, -3)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_collectible")
+item_id = "seed"
+display_name = "Seed"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SeedItem"]
+shape = SubResource("BoxShape3D_item")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SeedItem"]
+mesh = SubResource("BoxMesh_item")
+surface_material_override/0 = SubResource("StandardMaterial3D_seed")
+
+[node name="SkullItem" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.2, -3)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_collectible")
+item_id = "skull"
+display_name = "Skull"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SkullItem"]
+shape = SubResource("BoxShape3D_item")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SkullItem"]
+mesh = SubResource("BoxMesh_item")
+surface_material_override/0 = SubResource("StandardMaterial3D_skull")

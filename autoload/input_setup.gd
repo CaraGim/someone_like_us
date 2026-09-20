@@ -9,11 +9,6 @@ func _ready() -> void:
 	_define_action("toggle_phone", [_key(KEY_E)])
 	_define_action("camera_rotate_ccw", [_mouse(MOUSE_BUTTON_WHEEL_UP)])
 	_define_action("camera_rotate_cw", [_mouse(MOUSE_BUTTON_WHEEL_DOWN)])
-	# TODO: temporary debug key only, bound to the C key for quick QA of both
-	# game modes. Delete this action (and its handler in player.gd) once a
-	# real quest stage exists to call GameMode.set_mode() itself on
-	# stage enter/exit.
-	_define_action("debug_toggle_game_mode", [_key(KEY_C)])
 
 func _define_action(action_name: String, events: Array) -> void:
 	if not InputMap.has_action(action_name):

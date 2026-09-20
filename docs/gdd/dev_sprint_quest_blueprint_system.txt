@@ -1,0 +1,65 @@
+# Dev Sprint Note — Main Quest System + Blueprint System
+
+Goal: Build the main quest system and blueprint system first,
+as the prerequisite backbone for the basement "minimum enjoyable loop"
+(craft → install → pet/dirtiness loop) planned afterward.
+
+Reference: Game Mechanism.txt (Core loop, Quest data table),
+Game Data.txt (Quest data, Collectable object item, Blueprint list,
+player's data), quest_scenario.txt (Investigation stage 1 - Cemetery,
+the only fully detailed quest), UI_scenario.txt (Message app,
+To-do-list app, Blueprint app scenarios).
+
+Scope for this sprint:
+1. Quest data resource/structure
+   - Fields: ID, title, location, request items, puzzle description,
+     enemy attack pattern, enemy murdering action.
+   - Reference quest 1 "Thinker's bedroom" (Cemetery, items: Seed,
+     Skull) as the concrete first case; quests 2-5 stay stubs.
+
+2. Quest state tracking
+   - Per-quest status: not started / accepted / in progress / completed.
+   - Player's current quest + message history (see Game Data.txt
+     "player's data").
+
+3. NPC messaging flow (phone Message app)
+   - First-open greeting message.
+   - "report"-keyword flow: player sends quest-relative text,
+     NPC responds based on quest completion state.
+   - "Receive blueprint" button -> stores blueprint item in
+     Blueprint app list.
+
+4. Investigation stage entry/exit
+   - To-do-list app "Adventure the stage" button -> stage list ->
+     travel to selected stage.
+   - "back to the basement" button -> return, with partial-collection
+     dialogue choice ("Back to home" / "Let's keep looking.") per
+     quest_scenario.txt Phase 2.
+
+5. Item collection + inventory during investigation
+   - Collectable object items (seed, skull, etc.) picked up in stage,
+     stored in inventory, checked against quest's required items.
+
+6. Quest completion validation + reward
+   - On report: compare inventory against required items.
+   - If complete: NPC approves, grants reward blueprint
+     (e.g. "Plant Pot blueprint").
+   - If incomplete: NPC dialogue without reward.
+
+7. Blueprint list storage (Blueprint app)
+   - Received blueprints appear in Blueprint app list, named
+     "<Prop item name> blueprint".
+   - This is the hook point for the next sprint (crafting/install/
+     basement loop) but not built yet this sprint.
+
+Out of scope this sprint (deferred to basement-loop sprint):
+- Actual crafting animation/timer, install placement, prop
+  persistence, pet/dirtiness system.
+- Investigation stage hazard/enemy AI, minigames.
+
+Open questions / GDD gaps noticed:
+- Quests 2-5 investigation phases are empty in quest_scenario.txt --
+  only quest 1 (Cemetery) has full phase detail.
+- "Artistic" stat has no defined source/trigger yet.
+- Update/save-slot UI flow (UI_scenario.txt "Update" section) has
+  no interaction steps filled in.

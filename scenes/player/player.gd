@@ -54,13 +54,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if focused_interactable != null and focused_interactable.has_method("interact"):
 			focused_interactable.interact(self)
 
-	# TODO: temporary debug key only (bound to the C key, see input_setup.gd).
-	# Delete this handler once a real quest stage exists to call
-	# GameMode.set_mode() itself on stage enter/exit.
-	if event.is_action_pressed("debug_toggle_game_mode") and not locked:
-		var next_mode: int = GameMode.Mode.QUEST_STAGE if GameMode.current == GameMode.Mode.SANDBOX else GameMode.Mode.SANDBOX
-		GameMode.set_mode(next_mode)
-
 func _physics_process(delta: float) -> void:
 	_process_movement(delta)
 	camera_rig.update_iso_tracking()
